@@ -1,14 +1,14 @@
 package ubase
 
 import (
-	"github.com/uplus-io/ucluster"
+	"github.com/uplus-io/ucluster/v1"
 	"github.com/uplus-io/uengine"
 )
 
 type UBaseConfig struct {
-	Cluster       ucluster.UClusterConfig `json:"cluster" yaml:"cluster"`
-	StorageConfig StorageConfig           `json:"storage" yaml:"storage"`
-	LogConfig     LogConfig               `json:"log" yaml:"log"`
+	Cluster       v1.UClusterConfig `json:"cluster" yaml:"cluster"`
+	StorageConfig StorageConfig     `json:"storage" yaml:"storage"`
+	LogConfig     LogConfig         `json:"log" yaml:"log"`
 }
 
 type StorageConfig struct {
@@ -26,7 +26,7 @@ type LogConfig struct {
 
 type UBase struct {
 	config  *UBaseConfig
-	cluster *ucluster.UCluster
+	cluster *v1.UCluster
 	engine  *uengine.Engine
 }
 
@@ -35,7 +35,7 @@ func NewBase(config *UBaseConfig) *UBase {
 	base := &UBase{
 		config:  config,
 		engine:  engine,
-		cluster: ucluster.NewUCluster(&config.Cluster),
+		cluster: v1.NewUCluster(&config.Cluster),
 	}
 	configure(config, base)
 	return base
